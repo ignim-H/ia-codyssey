@@ -1,0 +1,44 @@
+# 2026-11-21 05:28:36 | 07_git
+$ git --version
+git version 2.56.1.windows.1
+
+$ git config --list --show-origin | grep -viE 'credential|token|password|helper'
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:C:/Users/<user>/.gitconfig	user.name=ignim
+file:C:/Users/<user>/.gitconfig	user.email=192585468+ignim-H@users.noreply.github.com
+file:C:/Users/<user>/.gitconfig	init.defaultbranch=main
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	remote.origin.url=https://github.com/ignim-H/ia-codyssey.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+$ git config --global user.name
+ignim
+
+$ git config --global init.defaultBranch
+main
+
+$ git remote -v
+origin	https://github.com/ignim-H/ia-codyssey.git (fetch)
+origin	https://github.com/ignim-H/ia-codyssey.git (push)
+
+$ git branch -vv
+* main c9d4db6 Initial commit
+
+$ git log --oneline -5
+c9d4db6 Initial commit
+

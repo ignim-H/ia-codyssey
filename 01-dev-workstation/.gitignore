@@ -1,0 +1,7 @@
+# 실습용 임시 폴더 (스크립트가 매번 새로 만듦)
+practice/
+
+# 로컬 환경 변수
+compose/.env
+
+.DS_Store

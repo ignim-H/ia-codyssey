@@ -1,0 +1,72 @@
+# 2026-11-21 05:26:44 | 01_terminal
+# --- 현재 위치 확인 / 절대경로 vs 상대경로 ---
+$ pwd
+/c/Users/<user>/Documents/ia-codyssey/01-dev-workstation
+
+$ cd '/c/Users/<user>/Documents/ia-codyssey/01-dev-workstation' && pwd && cd ./scripts && pwd && cd .. && pwd
+/c/Users/<user>/Documents/ia-codyssey/01-dev-workstation
+/c/Users/<user>/Documents/ia-codyssey/01-dev-workstation/scripts
+/c/Users/<user>/Documents/ia-codyssey/01-dev-workstation
+
+# --- 디렉토리 생성 (-p: 중간 경로까지 한 번에) ---
+$ mkdir -p 'practice/docs' 'practice/backup'
+
+# --- 목록 확인 (숨김 파일 포함) ---
+$ cd 'practice' && ls -la
+total 4
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 ..
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 backup
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 docs
+
+# --- 빈 파일 생성 / 숨김 파일 생성 ---
+$ cd 'practice' && touch empty.txt .hidden_config && ls -la
+total 4
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 ..
+-rw-r--r-- 1 user 197121 0 11월 21 05:26 .hidden_config
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 backup
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 docs
+-rw-r--r-- 1 user 197121 0 11월 21 05:26 empty.txt
+
+# --- 파일 내용 작성 및 확인 ---
+$ cd 'practice' && echo 'Hello Codyssey' > docs/note.txt && echo 'second line' >> docs/note.txt && cat docs/note.txt
+Hello Codyssey
+second line
+
+$ cd 'practice' && head -n 1 docs/note.txt && wc -l docs/note.txt
+Hello Codyssey
+2 docs/note.txt
+
+# --- 복사 ---
+$ cd 'practice' && cp docs/note.txt backup/note_copy.txt && ls -l backup
+total 1
+-rw-r--r-- 1 user 197121 27 11월 21 05:26 note_copy.txt
+
+# --- 이동 / 이름 변경 ---
+$ cd 'practice' && mv backup/note_copy.txt backup/note_renamed.txt && mv empty.txt docs/ && ls -l backup docs
+backup:
+total 1
+-rw-r--r-- 1 user 197121 27 11월 21 05:26 note_renamed.txt
+
+docs:
+total 1
+-rw-r--r-- 1 user 197121  0 11월 21 05:26 empty.txt
+-rw-r--r-- 1 user 197121 27 11월 21 05:26 note.txt
+
+# --- 삭제 ---
+$ cd 'practice' && rm backup/note_renamed.txt && rmdir backup && ls -la
+total 4
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 ..
+-rw-r--r-- 1 user 197121 0 11월 21 05:26 .hidden_config
+drwxr-xr-x 1 user 197121 0 11월 21 05:26 docs
+
+# --- 트리 형태로 최종 구조 확인 ---
+$ cd 'practice' && find . | sort
+.
+./.hidden_config
+./docs
+./docs/empty.txt
+./docs/note.txt
+

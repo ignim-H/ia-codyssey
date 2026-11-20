@@ -1,0 +1,19 @@
+services:
+  web:
+    build: ../app
+    image: codyssey-web:1.0
+    ports:
+      - "${WEB_PORT:-8888}:80"      # 호스트 포트는 .env 또는 환경 변수로 변경
+    environment:
+      APP_ENV: ${APP_ENV:-compose}   # 실행 모드 주입
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+
+  client:
+    image: busybox:latest
+    command: sleep infinity           # 네트워크 통신 테스트용 보조 컨테이너
+    depends_on:
+      - web

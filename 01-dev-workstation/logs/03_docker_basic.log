@@ -1,0 +1,158 @@
+# 2026-11-21 05:26:50 | 03_docker_basic
+# --- 설치 및 데몬 점검 ---
+$ docker --version
+Docker version 29.9.3, build 5457199
+
+$ docker info --format 'Server Version: {{.ServerVersion}} | OS: {{.OperatingSystem}} | Arch: {{.Architecture}} | CPUs: {{.NCPU}} | Mem: {{.MemTotal}} | Containers: {{.Containers}} | Images: {{.Images}}'
+Server Version: 29.9.3 | OS: Docker Desktop | Arch: x86_64 | CPUs: 20 | Mem: 16670089216 | Containers: 3 | Images: 5
+
+$ docker context ls
+NAME              DESCRIPTION                               DOCKER ENDPOINT                             ERROR
+default           Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine              
+desktop-linux *   Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine   
+
+# --- 이미지 다운로드 / 목록 ---
+$ docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+Digest: sha256:1e4c05b897a751332ce85c7e9449da2d93514ea2dea6dbb0e2753c9e949b2bfa
+Status: Image is up to date for hello-world:latest
+docker.io/library/hello-world:latest
+
+$ docker pull ubuntu:22.04
+22.04: Pulling from library/ubuntu
+Digest: sha256:f64b2ffc2f10ab8f8505aa56b2664bd846cbb9df87c7e2532e30f7667021c0e6
+Status: Image is up to date for ubuntu:22.04
+docker.io/library/ubuntu:22.04
+
+$ docker images
+IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
+busybox:latest       a46257e06c82       6.81MB         2.23MB        
+codyssey-web:1.0     0c4ddde248c0       93.9MB         26.4MB        
+hello-world:latest   1e4c05b897a7       25.9kB         9.49kB        
+redis:7-alpine       7f7d30b7fdd0       58.5MB         16.9MB        
+ubuntu:22.04         f64b2ffc2f10        120MB         32.1MB        
+
+# --- hello-world 실행 ---
+$ docker run --name hello-test hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+# --- ubuntu 컨테이너 내부 명령 실행 ---
+$ docker run --rm ubuntu:22.04 bash -c 'echo "inside container: $(hostname)"; cat /etc/os-release | head -2; ls /'
+inside container: d20acbbf76ab
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+bin
+boot
+dev
+etc
+home
+lib
+lib32
+lib64
+libx32
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+
+# --- 컨테이너 실행(백그라운드) / 목록 / 중지 ---
+$ docker run -d --name ubuntu-keep ubuntu:22.04 sleep infinity
+4db8a1d3249b2dd55536faf35dba0fe3faeea899f93d35b76ff4c933ced9fec0
+
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND                   CREATED        STATUS                  PORTS                                     NAMES
+4db8a1d3249b   ubuntu:22.04   "sleep infinity"          1 second ago   Up Less than a second                                             ubuntu-keep
+55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
+bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
+04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+
+$ docker exec ubuntu-keep bash -c 'echo hello from exec; ls /tmp'
+hello from exec
+
+$ docker stop ubuntu-keep
+ubuntu-keep
+
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND                   CREATED       STATUS                 PORTS                                     NAMES
+55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
+bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
+04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+
+$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                   CREATED         STATUS                                PORTS                                     NAMES
+4db8a1d3249b   ubuntu:22.04   "sleep infinity"          6 seconds ago   Exited (137) Less than a second ago                                             ubuntu-keep
+a5c3880500e5   hello-world    "/hello"                  8 seconds ago   Exited (0) 7 seconds ago                                                        hello-test
+55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
+bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
+04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+
+# --- attach vs exec 관찰 ---
+$ docker run -dit --name attach-test ubuntu:22.04 bash
+d502e79c5be6b5705894e826442c49be6dc9fd908a9b994799c5c83bcb72831c
+
+$ docker exec attach-test bash -c 'exit 0'; docker ps --filter name=attach-test --format '{{.Names}} {{.Status}}'
+attach-test Up Less than a second
+
+$ echo 'exit' | docker attach attach-test; sleep 1; docker ps -a --filter name=attach-test --format '{{.Names}} {{.Status}}'
+cannot attach stdin to a TTY-enabled container because stdin is not a terminal
+attach-test Up 2 seconds
+
+# --- 로그 / 리소스 확인 ---
+$ docker logs hello-test | head -5
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+
+$ docker start ubuntu-keep && docker stats --no-stream
+ubuntu-keep
+CONTAINER ID   NAME          CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+d502e79c5be6   attach-test   0.00%     2.527MiB / 15.53GiB   0.02%     956B / 126B       238kB / 0B        1
+4db8a1d3249b   ubuntu-keep   0.00%     1.316MiB / 15.53GiB   0.01%     872B / 126B       0B / 0B           1
+55ab64a90e80   web-bind      0.00%     21.33MiB / 15.53GiB   0.13%     3.1kB / 3.06kB    8.82MB / 8.19kB   21
+bf7539718890   web-8081      0.00%     18.21MiB / 15.53GiB   0.11%     3.04kB / 1.64kB   16.4kB / 8.19kB   21
+04a2e63bfb2e   web-8080      0.00%     17.76MiB / 15.53GiB   0.11%     3.68kB / 2.02kB   16.4kB / 8.19kB   21
+
+# --- 정리 ---
+$ docker rm -f hello-test ubuntu-keep attach-test
+hello-test
+ubuntu-keep
+attach-test
+
+$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                   CREATED       STATUS                 PORTS                                     NAMES
+55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
+bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
+04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+
