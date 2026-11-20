@@ -34,7 +34,7 @@ mask() {
   # macOS 기본 sed(BSD)는 대소문자 무시 플래그가 없어 perl 사용 (macOS/Linux 기본 탑재)
   perl -pe '
     s/(gh[pousr]_)[A-Za-z0-9]{10,}/$1****MASKED****/g;
-    s/((?:token|password|passwd|secret)[^=:\s]*\s*[=:]\s*)\S+/$1****MASKED****/gi;
+    s/\b((?:token|password|passwd|secret)\b\s*[=:]\s*)\S+/$1****MASKED****/gi;
     s#/Users/[^/\s]+#/Users/<user>#g;
     s#/home/[^/\s]+#/home/<user>#g;
   '

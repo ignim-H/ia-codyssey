@@ -1,4 +1,4 @@
-# 2026-11-21 05:30:46 | 01_terminal
+# 2026-11-21 05:47:43 | 01_terminal
 # --- 현재 위치 확인 / 절대경로 vs 상대경로 ---
 $ pwd
 /c/Users/<user>/Documents/ia-codyssey/01-dev-workstation
@@ -14,20 +14,20 @@ $ mkdir -p 'practice/terminal/docs' 'practice/terminal/backup'
 # --- 목록 확인 (숨김 파일 포함) ---
 $ cd 'practice/terminal' && ls -la
 total 4
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 .
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 ..
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 backup
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 docs
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 ..
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 backup
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 docs
 
 # --- 빈 파일 생성 / 숨김 파일 생성 ---
 $ cd 'practice/terminal' && touch empty.txt .hidden_config && ls -la
 total 4
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 .
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 ..
--rw-r--r-- 1 user 197121 0 11월 21 05:30 .hidden_config
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 backup
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 docs
--rw-r--r-- 1 user 197121 0 11월 21 05:30 empty.txt
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 ..
+-rw-r--r-- 1 user 197121 0 11월 21 05:47 .hidden_config
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 backup
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 docs
+-rw-r--r-- 1 user 197121 0 11월 21 05:47 empty.txt
 
 # --- 파일 내용 작성 및 확인 ---
 $ cd 'practice/terminal' && echo 'Hello Codyssey' > docs/note.txt && echo 'second line' >> docs/note.txt && cat docs/note.txt
@@ -41,26 +41,26 @@ Hello Codyssey
 # --- 복사 ---
 $ cd 'practice/terminal' && cp docs/note.txt backup/note_copy.txt && ls -l backup
 total 1
--rw-r--r-- 1 user 197121 27 11월 21 05:30 note_copy.txt
+-rw-r--r-- 1 user 197121 27 11월 21 05:47 note_copy.txt
 
 # --- 이동 / 이름 변경 ---
 $ cd 'practice/terminal' && mv backup/note_copy.txt backup/note_renamed.txt && mv empty.txt docs/ && ls -l backup docs
 backup:
 total 1
--rw-r--r-- 1 user 197121 27 11월 21 05:30 note_renamed.txt
+-rw-r--r-- 1 user 197121 27 11월 21 05:47 note_renamed.txt
 
 docs:
 total 1
--rw-r--r-- 1 user 197121  0 11월 21 05:30 empty.txt
--rw-r--r-- 1 user 197121 27 11월 21 05:30 note.txt
+-rw-r--r-- 1 user 197121  0 11월 21 05:47 empty.txt
+-rw-r--r-- 1 user 197121 27 11월 21 05:47 note.txt
 
 # --- 삭제 ---
 $ cd 'practice/terminal' && rm backup/note_renamed.txt && rmdir backup && ls -la
 total 4
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 .
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 ..
--rw-r--r-- 1 user 197121 0 11월 21 05:30 .hidden_config
-drwxr-xr-x 1 user 197121 0 11월 21 05:30 docs
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 ..
+-rw-r--r-- 1 user 197121 0 11월 21 05:47 .hidden_config
+drwxr-xr-x 1 user 197121 0 11월 21 05:47 docs
 
 # --- 트리 형태로 최종 구조 확인 ---
 $ cd 'practice/terminal' && find . | sort

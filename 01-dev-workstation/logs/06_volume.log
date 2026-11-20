@@ -1,4 +1,4 @@
-# 2026-11-21 05:31:39 | 06_volume
+# 2026-11-21 05:48:36 | 06_volume
 # --- 볼륨 생성 / 확인 ---
 $ docker volume create codyssey-data
 codyssey-data
@@ -12,10 +12,10 @@ codyssey-data | driver=local | mountpoint=/var/lib/docker/volumes/codyssey-data/
 
 # --- 컨테이너 1 에 볼륨 연결 후 데이터 기록 ---
 $ docker run -d --name vol-test -v codyssey-data:/data ubuntu:22.04 sleep infinity
-8f23b0a8204c84919bb026aae5a5ca48083e2387eb735e30b38b351fbda982c0
+2288b746de44ae1ae5c6a2a8270a2782dbe101d08be662a49d1c5540b360e45e
 
 $ docker exec vol-test bash -c 'echo "saved at $(date)" > /data/hello.txt && cat /data/hello.txt'
-saved at Fri Nov 20 20:31:42 UTC 2026
+saved at Fri Nov 20 20:48:39 UTC 2026
 
 # --- 비교용: 볼륨 밖(/tmp)에도 기록 ---
 $ docker exec vol-test bash -c 'echo temp > /tmp/temp.txt && ls /tmp/temp.txt'
@@ -30,10 +30,10 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 # --- 새 컨테이너 2 에 같은 볼륨 연결 → 데이터 유지 확인 ---
 $ docker run -d --name vol-test2 -v codyssey-data:/data ubuntu:22.04 sleep infinity
-7877e537fc4016586ac361019563576e1e29bd742a2849dd522293d859aebe2a
+81bcef414cf45c04e8d91f238b85f58ee1f12ff7a8a15ef0098c09f3b39c4bb4
 
 $ docker exec vol-test2 cat /data/hello.txt
-saved at Fri Nov 20 20:31:42 UTC 2026
+saved at Fri Nov 20 20:48:39 UTC 2026
 
 $ docker exec vol-test2 ls /tmp/temp.txt
 ls: cannot access '/tmp/temp.txt': No such file or directory

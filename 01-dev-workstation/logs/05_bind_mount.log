@@ -1,7 +1,7 @@
-# 2026-11-21 05:31:33 | 05_bind_mount
+# 2026-11-21 05:48:31 | 05_bind_mount
 # --- 호스트 디렉토리를 컨테이너 웹 루트에 바인드 마운트 ---
 $ docker run -d -p 8082:80 --name web-bind -v 'C:/Users/<user>/Documents/ia-codyssey/01-dev-workstation/practice/bind-site':/usr/share/nginx/html codyssey-web:1.0
-b7342a5fe38a2b1a0084f6c5380a397aeaac57a892d27aa4b7da609ac3cace30
+fa31e52889d7721a6b2278d351dea6b0222f04b765201d676985f5ed45568002
 
 $ docker inspect web-bind --format '{{range .Mounts}}{{.Type}}: {{.Source}} -> {{.Destination}}{{end}}'
 bind: C:/Users/<user>/Documents/ia-codyssey/01-dev-workstation/practice/bind-site -> /usr/share/nginx/html
@@ -14,15 +14,15 @@ $ curl -s http://localhost:8082 | grep MESSAGE
   <p id="message">MESSAGE: original</p>
 
 # --- 호스트에서 파일 수정 (컨테이너 재시작/재빌드 없음) ---
-$ sed -i.bak 's/MESSAGE: original/MESSAGE: changed on host at 05:31:37/' 'practice/bind-site/index.html' && rm -f 'practice/bind-site/index.html.bak'
+$ sed -i.bak 's/MESSAGE: original/MESSAGE: changed on host at 05:48:35/' 'practice/bind-site/index.html' && rm -f 'practice/bind-site/index.html.bak'
 
 # --- 변경 후 ---
 $ grep MESSAGE 'practice/bind-site/index.html'
-  <p id="message">MESSAGE: changed on host at 05:31:37</p>
+  <p id="message">MESSAGE: changed on host at 05:48:35</p>
 
 $ curl -s http://localhost:8082 | grep MESSAGE
-  <p id="message">MESSAGE: changed on host at 05:31:37</p>
+  <p id="message">MESSAGE: changed on host at 05:48:35</p>
 
 $ docker exec web-bind grep MESSAGE /usr/share/nginx/html/index.html
-  <p id="message">MESSAGE: changed on host at 05:31:37</p>
+  <p id="message">MESSAGE: changed on host at 05:48:35</p>
 

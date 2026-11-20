@@ -1,11 +1,11 @@
-# 2026-11-21 05:31:49 | 08_troubleshoot
+# 2026-11-21 05:48:45 | 08_troubleshoot
 # --- [케이스 1] 포트 충돌: 같은 호스트 포트(8090)를 두 컨테이너가 사용 ---
 $ docker run -d -p 8090:80 --name ts-a codyssey-web:1.0
-ee8ca2bccbf6b6531251c7bdf325dbca628647a69901bc877992f61707d3183a
+871d6e2f999da4ffb4deeea9e4b2bbb6b9ae2c3092f589fd2375403d3cdef93a
 
 $ docker run -d -p 8090:80 --name ts-b codyssey-web:1.0
-0d99fc5e25415b694a167a3eb928867289b20df601c591fd72013f26e80ca531
-docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint ts-b (ed38533362fd7abc32f672259837369489339fba3fc21ce38097ecd9a3f04eef): Bind for 0.0.0.0:8090 failed: port is already allocated
+fa3c6d7587b3139545ee8552a78af5bfe99c580901354f67b58b9909a007f7fd
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint ts-b (c0417012484597331293489b2819d2a79070a70454adb9d058931aae13e60595): Bind for 0.0.0.0:8090 failed: port is already allocated
 
 Run 'docker run --help' for more information
 
@@ -15,35 +15,35 @@ ts-a 0.0.0.0:8090->80/tcp, [::]:8090->80/tcp
 
 $ netstat -ano | grep LISTEN | grep ':8090 '
   TCP    0.0.0.0:8090           0.0.0.0:0              LISTENING       25496
-  TCP    127.0.0.1:8090         0.0.0.0:0              LISTENING       30700
+  TCP    127.0.0.1:8090         0.0.0.0:0              LISTENING       33788
   TCP    [::]:8090              [::]:0                 LISTENING       25496
-  TCP    [::1]:8090             [::]:0                 LISTENING       30700
+  TCP    [::1]:8090             [::]:0                 LISTENING       33788
 
 # --- 해결: 생성 실패한 컨테이너 제거 후 다른 호스트 포트(8091)로 실행 ---
 $ docker rm -f ts-b; docker run -d -p 8091:80 --name ts-b codyssey-web:1.0
 ts-b
-5afd866cfafe1f6a2d8fdef19cf16bab3834bccf5175be79d2cd95b15a485869
+c374c4b6907cb8373ab0f493c2809032ecbbad084d7b26a83c9cf5e21d6d1e6e
 
 $ curl -s -o /dev/null -w 'HTTP %{http_code}\n' http://localhost:8091
 HTTP 200
 
 # --- [케이스 2] 컨테이너 이름 중복 ---
 $ docker run -d --name ts-name ubuntu:22.04 sleep 60
-afe75a5366bee75a920f97f34f247798bbca8201ebe5fde3081e90649ad0ed3b
+fb395a22fef85998a29dcb61c03fbbb1505c96744f06275b6aa19981040a2d12
 
 $ docker run -d --name ts-name ubuntu:22.04 sleep 60
-docker: Error response from daemon: Conflict. The container name "/ts-name" is already in use by container "afe75a5366bee75a920f97f34f247798bbca8201ebe5fde3081e90649ad0ed3b". You have to remove (or rename) that container to be able to reuse that name.
+docker: Error response from daemon: Conflict. The container name "/ts-name" is already in use by container "fb395a22fef85998a29dcb61c03fbbb1505c96744f06275b6aa19981040a2d12". You have to remove (or rename) that container to be able to reuse that name.
 
 Run 'docker run --help' for more information
 
 # --- 확인: 같은 이름의 기존 컨테이너가 존재 (중지 상태여도 삭제 전까지 이름 점유) ---
 $ docker ps -a --filter name=ts-name --format '{{.Names}} {{.Status}}'
-ts-name Up 1 second
+ts-name Up Less than a second
 
 # --- 해결: 기존 컨테이너 삭제 후 재실행 (또는 --rm 사용) ---
 $ docker rm -f ts-name && docker run -d --name ts-name ubuntu:22.04 sleep 60
 ts-name
-af7465b9dceffe37e1485bb53c29f40d44bffb228ddcc3f651f26743819d4329
+dc75a244389ac3ddbae1407cdbc77bbd4b434998f1b320b05d8c80c04599de6b
 
 # --- 정리 ---
 $ docker rm -f ts-a ts-b ts-name

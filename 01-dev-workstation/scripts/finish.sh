@@ -47,7 +47,11 @@ echo "== 5) 커밋 & push"
 cd .. || exit 1
 git add -A
 git commit -m "feat: 01 개발 워크스테이션 미션 (터미널/권한/Docker/Dockerfile/포트/마운트/볼륨/Git)" || echo "   (새로 커밋할 변경 없음)"
-git push origin HEAD || { echo "[!] push 실패 - 위 메시지를 캡처해서 보내 주세요"; exit 1; }
+if [ -n "$FORCE_PUSH" ]; then
+  git push --force-with-lease origin HEAD || { echo "[!] push 실패 - 위 메시지를 캡처해서 보내 주세요"; exit 1; }
+else
+  git push origin HEAD || { echo "[!] push 실패 - 위 메시지를 캡처해서 보내 주세요"; exit 1; }
+fi
 
 echo
 git log --oneline -1

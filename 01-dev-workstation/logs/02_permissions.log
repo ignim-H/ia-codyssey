@@ -1,4 +1,4 @@
-# 2026-11-21 05:30:49 | 02_permissions
+# 2026-11-21 05:47:46 | 02_permissions
 # --- ubuntu 컨테이너(리눅스 파일시스템)에서 일반 사용자 uid 1000 으로 실습 ---
 $ docker run --rm --user 1000:1000 -v 'C:/Users/<user>/Documents/ia-codyssey/01-dev-workstation/practice/perm_lab.sh':/lab.sh:ro ubuntu:22.04 bash /lab.sh
 # --- 실행 사용자 (root 아님) ---
@@ -7,61 +7,61 @@ uid=1000 gid=1000 groups=1000
 
 # --- [파일] 변경 전 (기본 644) ---
 $ ls -l run.sh
--rw-r--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
+-rw-r--r-- 1 1000 1000 23 Nov 20 20:47 run.sh
 
 $ ./run.sh
 bash: line 1: ./run.sh: Permission denied
 
 # --- [파일] chmod 755 (rwxr-xr-x) → 실행 가능 ---
 $ chmod 755 run.sh && ls -l run.sh
--rwxr-xr-x 1 1000 1000 23 Nov 20 20:30 run.sh
+-rwxr-xr-x 1 1000 1000 23 Nov 20 20:47 run.sh
 
 $ ./run.sh
 script executed
 
 # --- [파일] chmod 644 (rw-r--r--) → 실행 불가 ---
 $ chmod 644 run.sh && ls -l run.sh
--rw-r--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
+-rw-r--r-- 1 1000 1000 23 Nov 20 20:47 run.sh
 
 $ ./run.sh
 bash: line 1: ./run.sh: Permission denied
 
 # --- [파일] 심볼릭 모드 u+x ---
 $ chmod u+x run.sh && ls -l run.sh
--rwxr--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
+-rwxr--r-- 1 1000 1000 23 Nov 20 20:47 run.sh
 
 # --- [파일] chmod 444 (r--r--r--) → 쓰기 불가 ---
 $ chmod 444 run.sh && ls -l run.sh && echo more >> run.sh
--r--r--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
+-r--r--r-- 1 1000 1000 23 Nov 20 20:47 run.sh
 bash: line 1: run.sh: Permission denied
 
 # --- [디렉토리] 변경 전 ---
 $ ls -ld secret_dir && ls secret_dir
-drwxr-xr-x 2 1000 1000 4096 Nov 20 20:30 secret_dir
+drwxr-xr-x 2 1000 1000 4096 Nov 20 20:47 secret_dir
 inside.txt
 
 # --- [디렉토리] chmod 700 → 소유자만 접근 ---
 $ chmod 700 secret_dir && ls -ld secret_dir
-drwx------ 2 1000 1000 4096 Nov 20 20:30 secret_dir
+drwx------ 2 1000 1000 4096 Nov 20 20:47 secret_dir
 
 # --- [디렉토리] chmod 300 (r 제거) → 목록 조회 불가, x 가 있어 파일 직접 접근은 가능 ---
 $ chmod 300 secret_dir && ls -ld secret_dir && ls secret_dir
-d-wx------ 2 1000 1000 4096 Nov 20 20:30 secret_dir
-ls: cannot open directory 'secret_dir': ****MASKED**** denied
+d-wx------ 2 1000 1000 4096 Nov 20 20:47 secret_dir
+ls: cannot open directory 'secret_dir': Permission denied
 
 $ cat secret_dir/inside.txt
 hello
 
 # --- [디렉토리] chmod 600 (x 제거) → 내부 파일 접근 불가 ---
 $ chmod 600 secret_dir && ls -ld secret_dir
-drw------- 2 1000 1000 4096 Nov 20 20:30 secret_dir
+drw------- 2 1000 1000 4096 Nov 20 20:47 secret_dir
 
 $ cat secret_dir/inside.txt
-cat: secret_dir/inside.txt: ****MASKED**** denied
+cat: secret_dir/inside.txt: Permission denied
 
 # --- [디렉토리] chmod 755 로 복구 ---
 $ chmod 755 secret_dir && ls -ld secret_dir && ls secret_dir
-drwxr-xr-x 2 1000 1000 4096 Nov 20 20:30 secret_dir
+drwxr-xr-x 2 1000 1000 4096 Nov 20 20:47 secret_dir
 inside.txt
 
 

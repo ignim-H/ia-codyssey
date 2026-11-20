@@ -1,10 +1,10 @@
-# 2026-11-21 05:30:51 | 03_docker_basic
+# 2026-11-21 05:47:50 | 03_docker_basic
 # --- 설치 및 데몬 점검 ---
 $ docker --version
 Docker version 29.9.3, build 5457199
 
 $ docker info --format 'Server Version: {{.ServerVersion}} | OS: {{.OperatingSystem}} | Arch: {{.Architecture}} | CPUs: {{.NCPU}} | Mem: {{.MemTotal}} | Containers: {{.Containers}} | Images: {{.Images}}'
-Server Version: 29.9.3 | OS: Docker Desktop | Arch: x86_64 | CPUs: 20 | Mem: 16670089216 | Containers: 0 | Images: 5
+Server Version: 29.9.3 | OS: Docker Desktop | Arch: x86_64 | CPUs: 20 | Mem: 16670097408 | Containers: 0 | Images: 5
 
 $ docker context ls
 NAME              DESCRIPTION                               DOCKER ENDPOINT                             ERROR
@@ -28,7 +28,7 @@ docker.io/library/ubuntu:22.04
 $ docker images
 IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
 busybox:latest       a46257e06c82       6.81MB         2.23MB        
-codyssey-web:1.0     29ddbcb426ff       93.9MB         26.4MB        
+codyssey-web:1.0     8b79f951c6bb       93.9MB         26.4MB        
 hello-world:latest   1e4c05b897a7       25.9kB         9.49kB        
 redis:7-alpine       7f7d30b7fdd0       58.5MB         16.9MB        
 ubuntu:22.04         f64b2ffc2f10        120MB         32.1MB        
@@ -60,7 +60,7 @@ For more examples and ideas, visit:
 
 # --- ubuntu 컨테이너 내부 명령 실행 ---
 $ docker run --rm ubuntu:22.04 bash -c 'echo "inside container: $(hostname)"; cat /etc/os-release | head -2; ls /'
-inside container: 0c8802dea47c
+inside container: 921f11570c70
 PRETTY_NAME="Ubuntu 22.04.5 LTS"
 NAME="Ubuntu"
 bin
@@ -87,11 +87,11 @@ var
 
 # --- 컨테이너 실행(백그라운드) / 목록 / 중지 ---
 $ docker run -d --name ubuntu-keep ubuntu:22.04 sleep infinity
-e052892a756efc8cefe0417f3a4dab0d7a400c53b3ae37c41795dd15977ea29f
+8fee012f685e380fc26636e2355f4918f28b41714f86cf204a89ab6991329605
 
 $ docker ps
 CONTAINER ID   IMAGE          COMMAND            CREATED        STATUS                  PORTS     NAMES
-e052892a756e   ubuntu:22.04   "sleep infinity"   1 second ago   Up Less than a second             ubuntu-keep
+8fee012f685e   ubuntu:22.04   "sleep infinity"   1 second ago   Up Less than a second             ubuntu-keep
 
 $ docker exec ubuntu-keep bash -c 'echo hello from exec; ls /tmp'
 hello from exec
@@ -104,12 +104,12 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 $ docker ps -a
 CONTAINER ID   IMAGE          COMMAND            CREATED         STATUS                                PORTS     NAMES
-e052892a756e   ubuntu:22.04   "sleep infinity"   6 seconds ago   Exited (137) Less than a second ago             ubuntu-keep
-92232ecf26cd   hello-world    "/hello"           7 seconds ago   Exited (0) 6 seconds ago                        hello-test
+8fee012f685e   ubuntu:22.04   "sleep infinity"   5 seconds ago   Exited (137) Less than a second ago             ubuntu-keep
+62368fec76c8   hello-world    "/hello"           7 seconds ago   Exited (0) 6 seconds ago                        hello-test
 
 # --- attach vs exec 관찰 ---
 $ docker run -di --name attach-test ubuntu:22.04 bash
-6ca0d6c50d6ee97b81eb850aabee39bd118786ae246f40b327eb5a2f29a4ed6d
+e7ea6cd2427106e59d2ab8a4c944cab93779360b235a3f8787d8da06cc508f04
 
 $ docker exec attach-test bash -c 'exit 0'; docker ps --filter name=attach-test --format '{{.Names}} {{.Status}}'
 attach-test Up Less than a second
@@ -128,7 +128,7 @@ To generate this message, Docker took the following steps:
 $ docker start ubuntu-keep && docker stats --no-stream
 ubuntu-keep
 CONTAINER ID   NAME          CPU %     MEM USAGE / LIMIT     MEM %     NET I/O      BLOCK I/O   PIDS
-e052892a756e   ubuntu-keep   0.00%     1.516MiB / 15.53GiB   0.01%     690B / 84B   0B / 0B     1
+8fee012f685e   ubuntu-keep   0.00%     1.344MiB / 15.53GiB   0.01%     690B / 84B   0B / 0B     1
 
 # --- 정리 ---
 $ docker rm -f hello-test ubuntu-keep attach-test
