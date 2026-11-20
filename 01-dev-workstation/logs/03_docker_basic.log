@@ -1,10 +1,10 @@
-# 2026-11-21 05:26:50 | 03_docker_basic
+# 2026-11-21 05:30:51 | 03_docker_basic
 # --- 설치 및 데몬 점검 ---
 $ docker --version
 Docker version 29.9.3, build 5457199
 
 $ docker info --format 'Server Version: {{.ServerVersion}} | OS: {{.OperatingSystem}} | Arch: {{.Architecture}} | CPUs: {{.NCPU}} | Mem: {{.MemTotal}} | Containers: {{.Containers}} | Images: {{.Images}}'
-Server Version: 29.9.3 | OS: Docker Desktop | Arch: x86_64 | CPUs: 20 | Mem: 16670089216 | Containers: 3 | Images: 5
+Server Version: 29.9.3 | OS: Docker Desktop | Arch: x86_64 | CPUs: 20 | Mem: 16670089216 | Containers: 0 | Images: 5
 
 $ docker context ls
 NAME              DESCRIPTION                               DOCKER ENDPOINT                             ERROR
@@ -28,7 +28,7 @@ docker.io/library/ubuntu:22.04
 $ docker images
 IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
 busybox:latest       a46257e06c82       6.81MB         2.23MB        
-codyssey-web:1.0     0c4ddde248c0       93.9MB         26.4MB        
+codyssey-web:1.0     29ddbcb426ff       93.9MB         26.4MB        
 hello-world:latest   1e4c05b897a7       25.9kB         9.49kB        
 redis:7-alpine       7f7d30b7fdd0       58.5MB         16.9MB        
 ubuntu:22.04         f64b2ffc2f10        120MB         32.1MB        
@@ -60,7 +60,7 @@ For more examples and ideas, visit:
 
 # --- ubuntu 컨테이너 내부 명령 실행 ---
 $ docker run --rm ubuntu:22.04 bash -c 'echo "inside container: $(hostname)"; cat /etc/os-release | head -2; ls /'
-inside container: d20acbbf76ab
+inside container: 0c8802dea47c
 PRETTY_NAME="Ubuntu 22.04.5 LTS"
 NAME="Ubuntu"
 bin
@@ -87,14 +87,11 @@ var
 
 # --- 컨테이너 실행(백그라운드) / 목록 / 중지 ---
 $ docker run -d --name ubuntu-keep ubuntu:22.04 sleep infinity
-4db8a1d3249b2dd55536faf35dba0fe3faeea899f93d35b76ff4c933ced9fec0
+e052892a756efc8cefe0417f3a4dab0d7a400c53b3ae37c41795dd15977ea29f
 
 $ docker ps
-CONTAINER ID   IMAGE          COMMAND                   CREATED        STATUS                  PORTS                                     NAMES
-4db8a1d3249b   ubuntu:22.04   "sleep infinity"          1 second ago   Up Less than a second                                             ubuntu-keep
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE          COMMAND            CREATED        STATUS                  PORTS     NAMES
+e052892a756e   ubuntu:22.04   "sleep infinity"   1 second ago   Up Less than a second             ubuntu-keep
 
 $ docker exec ubuntu-keep bash -c 'echo hello from exec; ls /tmp'
 hello from exec
@@ -103,29 +100,22 @@ $ docker stop ubuntu-keep
 ubuntu-keep
 
 $ docker ps
-CONTAINER ID   IMAGE          COMMAND                   CREATED       STATUS                 PORTS                                     NAMES
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 $ docker ps -a
-CONTAINER ID   IMAGE          COMMAND                   CREATED         STATUS                                PORTS                                     NAMES
-4db8a1d3249b   ubuntu:22.04   "sleep infinity"          6 seconds ago   Exited (137) Less than a second ago                                             ubuntu-keep
-a5c3880500e5   hello-world    "/hello"                  8 seconds ago   Exited (0) 7 seconds ago                                                        hello-test
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE          COMMAND            CREATED         STATUS                                PORTS     NAMES
+e052892a756e   ubuntu:22.04   "sleep infinity"   6 seconds ago   Exited (137) Less than a second ago             ubuntu-keep
+92232ecf26cd   hello-world    "/hello"           7 seconds ago   Exited (0) 6 seconds ago                        hello-test
 
 # --- attach vs exec 관찰 ---
-$ docker run -dit --name attach-test ubuntu:22.04 bash
-d502e79c5be6b5705894e826442c49be6dc9fd908a9b994799c5c83bcb72831c
+$ docker run -di --name attach-test ubuntu:22.04 bash
+6ca0d6c50d6ee97b81eb850aabee39bd118786ae246f40b327eb5a2f29a4ed6d
 
 $ docker exec attach-test bash -c 'exit 0'; docker ps --filter name=attach-test --format '{{.Names}} {{.Status}}'
 attach-test Up Less than a second
 
 $ echo 'exit' | docker attach attach-test; sleep 1; docker ps -a --filter name=attach-test --format '{{.Names}} {{.Status}}'
-cannot attach stdin to a TTY-enabled container because stdin is not a terminal
-attach-test Up 2 seconds
+attach-test Exited (0) 1 second ago
 
 # --- 로그 / 리소스 확인 ---
 $ docker logs hello-test | head -5
@@ -137,12 +127,8 @@ To generate this message, Docker took the following steps:
 
 $ docker start ubuntu-keep && docker stats --no-stream
 ubuntu-keep
-CONTAINER ID   NAME          CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
-d502e79c5be6   attach-test   0.00%     2.527MiB / 15.53GiB   0.02%     956B / 126B       238kB / 0B        1
-4db8a1d3249b   ubuntu-keep   0.00%     1.316MiB / 15.53GiB   0.01%     872B / 126B       0B / 0B           1
-55ab64a90e80   web-bind      0.00%     21.33MiB / 15.53GiB   0.13%     3.1kB / 3.06kB    8.82MB / 8.19kB   21
-bf7539718890   web-8081      0.00%     18.21MiB / 15.53GiB   0.11%     3.04kB / 1.64kB   16.4kB / 8.19kB   21
-04a2e63bfb2e   web-8080      0.00%     17.76MiB / 15.53GiB   0.11%     3.68kB / 2.02kB   16.4kB / 8.19kB   21
+CONTAINER ID   NAME          CPU %     MEM USAGE / LIMIT     MEM %     NET I/O      BLOCK I/O   PIDS
+e052892a756e   ubuntu-keep   0.00%     1.516MiB / 15.53GiB   0.01%     690B / 84B   0B / 0B     1
 
 # --- 정리 ---
 $ docker rm -f hello-test ubuntu-keep attach-test
@@ -151,8 +137,5 @@ ubuntu-keep
 attach-test
 
 $ docker ps -a
-CONTAINER ID   IMAGE          COMMAND                   CREATED       STATUS                 PORTS                                     NAMES
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 

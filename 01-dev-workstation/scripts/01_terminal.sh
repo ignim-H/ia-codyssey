@@ -3,7 +3,7 @@
 source "$(dirname "$0")/lib.sh"
 start_log 01_terminal
 
-P="practice"
+P="practice/terminal"
 rm -rf "$P"
 
 note "현재 위치 확인 / 절대경로 vs 상대경로"

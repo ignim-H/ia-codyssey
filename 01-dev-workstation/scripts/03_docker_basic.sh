@@ -29,9 +29,10 @@ run "docker ps"
 run "docker ps -a"
 
 note "attach vs exec 관찰"
+# (-t 없이 -i 만 사용: 파이프 입력은 TTY 가 아니라서 -t 컨테이너에는 attach 불가)
 # attach: 컨테이너의 메인 프로세스(PID 1)에 붙음 → 거기서 exit 하면 컨테이너가 종료됨
 # exec : 별도 프로세스를 새로 띄움 → exit 해도 메인 프로세스는 계속 살아 있음
-run "docker run -dit --name attach-test ubuntu:22.04 bash"
+run "docker run -di --name attach-test ubuntu:22.04 bash"
 run "docker exec attach-test bash -c 'exit 0'; docker ps --filter name=attach-test --format '{{.Names}} {{.Status}}'"
 run "echo 'exit' | docker attach attach-test; sleep 1; docker ps -a --filter name=attach-test --format '{{.Names}} {{.Status}}'"
 

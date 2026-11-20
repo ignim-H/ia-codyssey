@@ -36,7 +36,7 @@
 
 <!-- LOG:00_env -->
 ```bash
-# 2026-11-21 05:26:41 | 00_env
+# 2026-11-21 05:30:43 | 00_env
 $ cmd /c ver
 
 Microsoft Windows [Version 10.0.26300.9974]
@@ -133,7 +133,7 @@ perl scripts/fill_readme.pl
 
 <!-- LOG:01_terminal -->
 ```bash
-# 2026-11-21 05:26:44 | 01_terminal
+# 2026-11-21 05:30:46 | 01_terminal
 # --- 현재 위치 확인 / 절대경로 vs 상대경로 ---
 $ pwd
 /c/Users/<user>/Documents/ia-codyssey/01-dev-workstation
@@ -144,61 +144,61 @@ $ cd '/c/Users/<user>/Documents/ia-codyssey/01-dev-workstation' && pwd && cd ./s
 /c/Users/<user>/Documents/ia-codyssey/01-dev-workstation
 
 # --- 디렉토리 생성 (-p: 중간 경로까지 한 번에) ---
-$ mkdir -p 'practice/docs' 'practice/backup'
+$ mkdir -p 'practice/terminal/docs' 'practice/terminal/backup'
 
 # --- 목록 확인 (숨김 파일 포함) ---
-$ cd 'practice' && ls -la
+$ cd 'practice/terminal' && ls -la
 total 4
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 .
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 ..
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 backup
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 docs
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 ..
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 backup
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 docs
 
 # --- 빈 파일 생성 / 숨김 파일 생성 ---
-$ cd 'practice' && touch empty.txt .hidden_config && ls -la
+$ cd 'practice/terminal' && touch empty.txt .hidden_config && ls -la
 total 4
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 .
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 ..
--rw-r--r-- 1 user 197121 0 11월 21 05:26 .hidden_config
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 backup
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 docs
--rw-r--r-- 1 user 197121 0 11월 21 05:26 empty.txt
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 ..
+-rw-r--r-- 1 user 197121 0 11월 21 05:30 .hidden_config
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 backup
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 docs
+-rw-r--r-- 1 user 197121 0 11월 21 05:30 empty.txt
 
 # --- 파일 내용 작성 및 확인 ---
-$ cd 'practice' && echo 'Hello Codyssey' > docs/note.txt && echo 'second line' >> docs/note.txt && cat docs/note.txt
+$ cd 'practice/terminal' && echo 'Hello Codyssey' > docs/note.txt && echo 'second line' >> docs/note.txt && cat docs/note.txt
 Hello Codyssey
 second line
 
-$ cd 'practice' && head -n 1 docs/note.txt && wc -l docs/note.txt
+$ cd 'practice/terminal' && head -n 1 docs/note.txt && wc -l docs/note.txt
 Hello Codyssey
 2 docs/note.txt
 
 # --- 복사 ---
-$ cd 'practice' && cp docs/note.txt backup/note_copy.txt && ls -l backup
+$ cd 'practice/terminal' && cp docs/note.txt backup/note_copy.txt && ls -l backup
 total 1
--rw-r--r-- 1 user 197121 27 11월 21 05:26 note_copy.txt
+-rw-r--r-- 1 user 197121 27 11월 21 05:30 note_copy.txt
 
 # --- 이동 / 이름 변경 ---
-$ cd 'practice' && mv backup/note_copy.txt backup/note_renamed.txt && mv empty.txt docs/ && ls -l backup docs
+$ cd 'practice/terminal' && mv backup/note_copy.txt backup/note_renamed.txt && mv empty.txt docs/ && ls -l backup docs
 backup:
 total 1
--rw-r--r-- 1 user 197121 27 11월 21 05:26 note_renamed.txt
+-rw-r--r-- 1 user 197121 27 11월 21 05:30 note_renamed.txt
 
 docs:
 total 1
--rw-r--r-- 1 user 197121  0 11월 21 05:26 empty.txt
--rw-r--r-- 1 user 197121 27 11월 21 05:26 note.txt
+-rw-r--r-- 1 user 197121  0 11월 21 05:30 empty.txt
+-rw-r--r-- 1 user 197121 27 11월 21 05:30 note.txt
 
 # --- 삭제 ---
-$ cd 'practice' && rm backup/note_renamed.txt && rmdir backup && ls -la
+$ cd 'practice/terminal' && rm backup/note_renamed.txt && rmdir backup && ls -la
 total 4
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 .
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 ..
--rw-r--r-- 1 user 197121 0 11월 21 05:26 .hidden_config
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 docs
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 .
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 ..
+-rw-r--r-- 1 user 197121 0 11월 21 05:30 .hidden_config
+drwxr-xr-x 1 user 197121 0 11월 21 05:30 docs
 
 # --- 트리 형태로 최종 구조 확인 ---
-$ cd 'practice' && find . | sort
+$ cd 'practice/terminal' && find . | sort
 .
 ./.hidden_config
 ./docs
@@ -226,57 +226,70 @@ $ cd 'practice' && find . | sort
 
 <!-- LOG:02_permissions -->
 ```bash
-# 2026-11-21 05:26:46 | 02_permissions
-# --- [파일] 변경 전 ---
-$ ls -l 'practice/perm/run.sh'
--rw-r--r-- 1 user 197121 23 11월 21 05:26 practice/perm/run.sh
+# 2026-11-21 05:30:49 | 02_permissions
+# --- ubuntu 컨테이너(리눅스 파일시스템)에서 일반 사용자 uid 1000 으로 실습 ---
+$ docker run --rm --user 1000:1000 -v 'C:/Users/<user>/Documents/ia-codyssey/01-dev-workstation/practice/perm_lab.sh':/lab.sh:ro ubuntu:22.04 bash /lab.sh
+# --- 실행 사용자 (root 아님) ---
+$ id
+uid=1000 gid=1000 groups=1000
 
-$ ./practice/perm/run.sh
-script executed
+# --- [파일] 변경 전 (기본 644) ---
+$ ls -l run.sh
+-rw-r--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
+
+$ ./run.sh
+bash: line 1: ./run.sh: Permission denied
 
 # --- [파일] chmod 755 (rwxr-xr-x) → 실행 가능 ---
-$ chmod 755 'practice/perm/run.sh' && ls -l 'practice/perm/run.sh'
--rw-r--r-- 1 user 197121 23 11월 21 05:26 practice/perm/run.sh
+$ chmod 755 run.sh && ls -l run.sh
+-rwxr-xr-x 1 1000 1000 23 Nov 20 20:30 run.sh
 
-$ ./practice/perm/run.sh
+$ ./run.sh
 script executed
 
 # --- [파일] chmod 644 (rw-r--r--) → 실행 불가 ---
-$ chmod 644 'practice/perm/run.sh' && ls -l 'practice/perm/run.sh'
--rw-r--r-- 1 user 197121 23 11월 21 05:26 practice/perm/run.sh
+$ chmod 644 run.sh && ls -l run.sh
+-rw-r--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
 
-$ ./practice/perm/run.sh
-script executed
+$ ./run.sh
+bash: line 1: ./run.sh: Permission denied
 
-# --- [파일] 심볼릭 모드: u+x ---
-$ chmod u+x 'practice/perm/run.sh' && ls -l 'practice/perm/run.sh'
--rw-r--r-- 1 user 197121 23 11월 21 05:26 practice/perm/run.sh
+# --- [파일] 심볼릭 모드 u+x ---
+$ chmod u+x run.sh && ls -l run.sh
+-rwxr--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
+
+# --- [파일] chmod 444 (r--r--r--) → 쓰기 불가 ---
+$ chmod 444 run.sh && ls -l run.sh && echo more >> run.sh
+-r--r--r-- 1 1000 1000 23 Nov 20 20:30 run.sh
+bash: line 1: run.sh: Permission denied
 
 # --- [디렉토리] 변경 전 ---
-$ ls -ld 'practice/perm/secret_dir' && ls 'practice/perm/secret_dir'
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 practice/perm/secret_dir
+$ ls -ld secret_dir && ls secret_dir
+drwxr-xr-x 2 1000 1000 4096 Nov 20 20:30 secret_dir
 inside.txt
 
 # --- [디렉토리] chmod 700 → 소유자만 접근 ---
-$ chmod 700 'practice/perm/secret_dir' && ls -ld 'practice/perm/secret_dir'
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 practice/perm/secret_dir
+$ chmod 700 secret_dir && ls -ld secret_dir
+drwx------ 2 1000 1000 4096 Nov 20 20:30 secret_dir
 
-# --- [디렉토리] chmod 300 (r 제거) → 목록 조회 불가, x 있으므로 파일 직접 접근은 가능 ---
-$ chmod 300 'practice/perm/secret_dir' && ls -ld 'practice/perm/secret_dir' && ls 'practice/perm/secret_dir'
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 practice/perm/secret_dir
-inside.txt
+# --- [디렉토리] chmod 300 (r 제거) → 목록 조회 불가, x 가 있어 파일 직접 접근은 가능 ---
+$ chmod 300 secret_dir && ls -ld secret_dir && ls secret_dir
+d-wx------ 2 1000 1000 4096 Nov 20 20:30 secret_dir
+ls: cannot open directory 'secret_dir': ****MASKED**** denied
 
-$ cat 'practice/perm/secret_dir/inside.txt'
+$ cat secret_dir/inside.txt
 hello
 
-# --- [디렉토리] chmod 600 (x 제거) → 내부 진입/접근 불가 ---
-$ chmod 600 'practice/perm/secret_dir' && ls -ld 'practice/perm/secret_dir' && cat 'practice/perm/secret_dir/inside.txt'
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 practice/perm/secret_dir
-hello
+# --- [디렉토리] chmod 600 (x 제거) → 내부 파일 접근 불가 ---
+$ chmod 600 secret_dir && ls -ld secret_dir
+drw------- 2 1000 1000 4096 Nov 20 20:30 secret_dir
+
+$ cat secret_dir/inside.txt
+cat: secret_dir/inside.txt: ****MASKED**** denied
 
 # --- [디렉토리] chmod 755 로 복구 ---
-$ chmod 755 'practice/perm/secret_dir' && ls -ld 'practice/perm/secret_dir' && ls 'practice/perm/secret_dir'
-drwxr-xr-x 1 user 197121 0 11월 21 05:26 practice/perm/secret_dir
+$ chmod 755 secret_dir && ls -ld secret_dir && ls secret_dir
+drwxr-xr-x 2 1000 1000 4096 Nov 20 20:30 secret_dir
 inside.txt
 ```
 
@@ -299,13 +312,13 @@ inside.txt
 
 <!-- LOG:03_docker_basic -->
 ```bash
-# 2026-11-21 05:26:50 | 03_docker_basic
+# 2026-11-21 05:30:51 | 03_docker_basic
 # --- 설치 및 데몬 점검 ---
 $ docker --version
 Docker version 29.9.3, build 5457199
 
 $ docker info --format 'Server Version: {{.ServerVersion}} | OS: {{.OperatingSystem}} | Arch: {{.Architecture}} | CPUs: {{.NCPU}} | Mem: {{.MemTotal}} | Containers: {{.Containers}} | Images: {{.Images}}'
-Server Version: 29.9.3 | OS: Docker Desktop | Arch: x86_64 | CPUs: 20 | Mem: 16670089216 | Containers: 3 | Images: 5
+Server Version: 29.9.3 | OS: Docker Desktop | Arch: x86_64 | CPUs: 20 | Mem: 16670089216 | Containers: 0 | Images: 5
 
 $ docker context ls
 NAME              DESCRIPTION                               DOCKER ENDPOINT                             ERROR
@@ -329,7 +342,7 @@ docker.io/library/ubuntu:22.04
 $ docker images
 IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
 busybox:latest       a46257e06c82       6.81MB         2.23MB        
-codyssey-web:1.0     0c4ddde248c0       93.9MB         26.4MB        
+codyssey-web:1.0     29ddbcb426ff       93.9MB         26.4MB        
 hello-world:latest   1e4c05b897a7       25.9kB         9.49kB        
 redis:7-alpine       7f7d30b7fdd0       58.5MB         16.9MB        
 ubuntu:22.04         f64b2ffc2f10        120MB         32.1MB        
@@ -361,7 +374,7 @@ For more examples and ideas, visit:
 
 # --- ubuntu 컨테이너 내부 명령 실행 ---
 $ docker run --rm ubuntu:22.04 bash -c 'echo "inside container: $(hostname)"; cat /etc/os-release | head -2; ls /'
-inside container: d20acbbf76ab
+inside container: 0c8802dea47c
 PRETTY_NAME="Ubuntu 22.04.5 LTS"
 NAME="Ubuntu"
 bin
@@ -388,14 +401,11 @@ var
 
 # --- 컨테이너 실행(백그라운드) / 목록 / 중지 ---
 $ docker run -d --name ubuntu-keep ubuntu:22.04 sleep infinity
-4db8a1d3249b2dd55536faf35dba0fe3faeea899f93d35b76ff4c933ced9fec0
+e052892a756efc8cefe0417f3a4dab0d7a400c53b3ae37c41795dd15977ea29f
 
 $ docker ps
-CONTAINER ID   IMAGE          COMMAND                   CREATED        STATUS                  PORTS                                     NAMES
-4db8a1d3249b   ubuntu:22.04   "sleep infinity"          1 second ago   Up Less than a second                                             ubuntu-keep
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago    Up 5 hours (healthy)    0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE          COMMAND            CREATED        STATUS                  PORTS     NAMES
+e052892a756e   ubuntu:22.04   "sleep infinity"   1 second ago   Up Less than a second             ubuntu-keep
 
 $ docker exec ubuntu-keep bash -c 'echo hello from exec; ls /tmp'
 hello from exec
@@ -404,29 +414,22 @@ $ docker stop ubuntu-keep
 ubuntu-keep
 
 $ docker ps
-CONTAINER ID   IMAGE          COMMAND                   CREATED       STATUS                 PORTS                                     NAMES
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 $ docker ps -a
-CONTAINER ID   IMAGE          COMMAND                   CREATED         STATUS                                PORTS                                     NAMES
-4db8a1d3249b   ubuntu:22.04   "sleep infinity"          6 seconds ago   Exited (137) Less than a second ago                                             ubuntu-keep
-a5c3880500e5   hello-world    "/hello"                  8 seconds ago   Exited (0) 7 seconds ago                                                        hello-test
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago     Up 5 hours (healthy)                  0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE          COMMAND            CREATED         STATUS                                PORTS     NAMES
+e052892a756e   ubuntu:22.04   "sleep infinity"   6 seconds ago   Exited (137) Less than a second ago             ubuntu-keep
+92232ecf26cd   hello-world    "/hello"           7 seconds ago   Exited (0) 6 seconds ago                        hello-test
 
 # --- attach vs exec 관찰 ---
-$ docker run -dit --name attach-test ubuntu:22.04 bash
-d502e79c5be6b5705894e826442c49be6dc9fd908a9b994799c5c83bcb72831c
+$ docker run -di --name attach-test ubuntu:22.04 bash
+6ca0d6c50d6ee97b81eb850aabee39bd118786ae246f40b327eb5a2f29a4ed6d
 
 $ docker exec attach-test bash -c 'exit 0'; docker ps --filter name=attach-test --format '{{.Names}} {{.Status}}'
 attach-test Up Less than a second
 
 $ echo 'exit' | docker attach attach-test; sleep 1; docker ps -a --filter name=attach-test --format '{{.Names}} {{.Status}}'
-cannot attach stdin to a TTY-enabled container because stdin is not a terminal
-attach-test Up 2 seconds
+attach-test Exited (0) 1 second ago
 
 # --- 로그 / 리소스 확인 ---
 $ docker logs hello-test | head -5
@@ -438,12 +441,8 @@ To generate this message, Docker took the following steps:
 
 $ docker start ubuntu-keep && docker stats --no-stream
 ubuntu-keep
-CONTAINER ID   NAME          CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
-d502e79c5be6   attach-test   0.00%     2.527MiB / 15.53GiB   0.02%     956B / 126B       238kB / 0B        1
-4db8a1d3249b   ubuntu-keep   0.00%     1.316MiB / 15.53GiB   0.01%     872B / 126B       0B / 0B           1
-55ab64a90e80   web-bind      0.00%     21.33MiB / 15.53GiB   0.13%     3.1kB / 3.06kB    8.82MB / 8.19kB   21
-bf7539718890   web-8081      0.00%     18.21MiB / 15.53GiB   0.11%     3.04kB / 1.64kB   16.4kB / 8.19kB   21
-04a2e63bfb2e   web-8080      0.00%     17.76MiB / 15.53GiB   0.11%     3.68kB / 2.02kB   16.4kB / 8.19kB   21
+CONTAINER ID   NAME          CPU %     MEM USAGE / LIMIT     MEM %     NET I/O      BLOCK I/O   PIDS
+e052892a756e   ubuntu-keep   0.00%     1.516MiB / 15.53GiB   0.01%     690B / 84B   0B / 0B     1
 
 # --- 정리 ---
 $ docker rm -f hello-test ubuntu-keep attach-test
@@ -452,10 +451,7 @@ ubuntu-keep
 attach-test
 
 $ docker ps -a
-CONTAINER ID   IMAGE          COMMAND                   CREATED       STATUS                 PORTS                                     NAMES
-55ab64a90e80   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   web-bind
-bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   web-8081
-04a2e63bfb2e   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hours (healthy)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-8080
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
 전체 로그: [logs/03_docker_basic.log](logs/03_docker_basic.log)
@@ -488,7 +484,7 @@ bf7539718890   9caabdfedb7e   "/docker-entrypoint.…"   5 hours ago   Up 5 hour
 
 <!-- LOG:04_build_run -->
 ```bash
-# 2026-11-21 05:27:12 | 04_build_run
+# 2026-11-21 05:31:12 | 04_build_run
 # --- Dockerfile 내용 ---
 $ cat 'app/Dockerfile'
 # 베이스: 공식 nginx:alpine 이미지 (방식 A - 웹 서버 베이스 + 콘텐츠/설정 교체)
@@ -526,48 +522,44 @@ $ docker build -t codyssey-web:1.0 'app'
 #1 DONE 0.0s
 
 #2 [internal] load metadata for docker.io/library/nginx:alpine
-#2 ...
+#2 DONE 0.8s
 
-#3 [auth] library/nginx:pull token for registry-1.docker.io
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
 #3 DONE 0.0s
 
-#2 [internal] load metadata for docker.io/library/nginx:alpine
-#2 DONE 1.3s
-
-#4 [internal] load .dockerignore
-#4 transferring context: 2B done
+#4 [internal] load build context
+#4 transferring context: 124B done
 #4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 124B done
-#5 DONE 0.0s
+#5 [1/4] FROM docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7
+#5 resolve docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7 0.1s done
+#5 DONE 0.1s
 
-#6 [1/4] FROM docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7
-#6 resolve docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7 0.0s done
-#6 DONE 0.0s
+#6 [2/4] RUN apk add --no-cache curl
+#6 CACHED
 
-#7 [2/4] RUN apk add --no-cache curl
+#7 [3/4] COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 #7 CACHED
 
-#8 [3/4] COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+#8 [4/4] COPY site/ /usr/share/nginx/html/
 #8 CACHED
 
-#9 [4/4] COPY site/ /usr/share/nginx/html/
-#9 CACHED
-
-#10 exporting to image
-#10 exporting layers done
-#10 exporting manifest sha256:223c23cf4e559864a0a5074c7dad96ef8329f7ceb3700cdcd76923455a16db78 0.0s done
-#10 exporting config sha256:27ae264753b1efe88fadf7ba3cc4af0acf07d441a4819232a3b34685434c94ad done
-#10 exporting attestation manifest sha256:46695c493dec0727904d744dc8b44c8dc508e994bea0649f00bdeef1eadcc07c 0.0s done
-#10 exporting manifest list sha256:5c7bed3de0d16faba81c1c147f40386cc0ab33fa609522ff3843cb3d5e08ca99 0.0s done
-#10 naming to docker.io/library/codyssey-web:1.0 done
-#10 unpacking to docker.io/library/codyssey-web:1.0 done
-#10 DONE 0.2s
+#9 exporting to image
+#9 exporting layers done
+#9 exporting manifest sha256:223c23cf4e559864a0a5074c7dad96ef8329f7ceb3700cdcd76923455a16db78 done
+#9 exporting config sha256:27ae264753b1efe88fadf7ba3cc4af0acf07d441a4819232a3b34685434c94ad
+#9 exporting config sha256:27ae264753b1efe88fadf7ba3cc4af0acf07d441a4819232a3b34685434c94ad 0.0s done
+#9 exporting attestation manifest sha256:d7208231e2e102d60e203c97ffbab45cb895557f5bacea14fe516c74c5ed3dea 0.0s done
+#9 exporting manifest list sha256:67d918b5695f8074b6531d02e6bc05bacecb6e50c24f4e8277e05ee24dc10716 0.0s done
+#9 naming to docker.io/library/codyssey-web:1.0
+#9 naming to docker.io/library/codyssey-web:1.0 done
+#9 unpacking to docker.io/library/codyssey-web:1.0 0.0s done
+#9 DONE 0.2s
 
 $ docker images codyssey-web
 IMAGE              ID             DISK USAGE   CONTENT SIZE   EXTRA
-codyssey-web:1.0   5c7bed3de0d1       93.9MB         26.4MB   U    
+codyssey-web:1.0   67d918b5695f       93.9MB         26.4MB        
 
 $ docker inspect codyssey-web:1.0 --format '{{json .Config.Labels}}'
 {"maintainer":"NGINX Docker Maintainers <docker-maint@nginx.com>","org.opencontainers.image.description":"Codyssey 개발 워크스테이션 미션용 커스텀 NGINX","org.opencontainers.image.title":"codyssey-web","org.opencontainers.image.version":"1.0"}
@@ -577,17 +569,16 @@ $ docker inspect codyssey-web:1.0 --format '{{json .Config.Env}}'
 
 # --- 포트 매핑 실행 (호스트 8080 → 컨테이너 80) ---
 $ docker run -d -p 8080:80 --name web-8080 codyssey-web:1.0
-689d880778174dd0a85bb3f7b2b54e2928ac6902f6747afa7228966d72e6b6e3
+8d5ab09770300ad36561c1ce37d53d008fb9cb3efd995e4e083f162e0fa059df
 
 # --- 포트 매핑 실행 (호스트 8081 → 컨테이너 80, 같은 이미지로 두 번째 컨테이너) ---
 $ docker run -d -p 8081:80 -e APP_ENV=prod --name web-8081 codyssey-web:1.0
-6cb43bef86e3c58988355599ebe41c80d56dd1245d3adc7de64067beffe34bd1
+acfd9c514fd3cc8cd39fba45b37a399abad60775725a6d228d03de23878aa9f9
 
 $ docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'
 NAMES      IMAGE              PORTS                                     STATUS
 web-8081   codyssey-web:1.0   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   Up 3 seconds (health: starting)
 web-8080   codyssey-web:1.0   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   Up 4 seconds (health: starting)
-web-bind   9caabdfedb7e       0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   Up 5 hours (healthy)
 
 $ curl -s http://localhost:8080 | grep -E '<h1>|MESSAGE'
   <h1>Hello, Codyssey!</h1>
@@ -600,7 +591,7 @@ $ curl -s http://localhost:8081 | grep -E '<h1>|MESSAGE'
 $ curl -si http://localhost:8080/health
 HTTP/1.1 200 OK
 Server: nginx
-Date: Fri, 20 Nov 2026 20:27:22 GMT
+Date: Fri, 20 Nov 2026 20:31:21 GMT
 Content-Type: text/plain
 Content-Length: 3
 Connection: keep-alive
@@ -615,37 +606,37 @@ $ docker inspect web-8080 --format '{{.State.Health.Status}}'
 healthy
 
 $ docker logs web-8080 | tail -5
-2026/11/20 20:27:17 [notice] 1#1: using the "epoll" event method
-2026/11/20 20:27:17 [notice] 1#1: nginx/1.31.9
-2026/11/20 20:27:17 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
-2026/11/20 20:27:17 [notice] 1#1: OS: Linux 6.18.58.1-microsoft-standard-WSL2
-2026/11/20 20:27:17 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
-2026/11/20 20:27:17 [notice] 1#1: start worker processes
-2026/11/20 20:27:17 [notice] 1#1: start worker process 29
-2026/11/20 20:27:17 [notice] 1#1: start worker process 30
-2026/11/20 20:27:17 [notice] 1#1: start worker process 31
-2026/11/20 20:27:17 [notice] 1#1: start worker process 32
-2026/11/20 20:27:17 [notice] 1#1: start worker process 33
-2026/11/20 20:27:17 [notice] 1#1: start worker process 34
-2026/11/20 20:27:17 [notice] 1#1: start worker process 35
-2026/11/20 20:27:17 [notice] 1#1: start worker process 36
-2026/11/20 20:27:17 [notice] 1#1: start worker process 37
-2026/11/20 20:27:17 [notice] 1#1: start worker process 38
-2026/11/20 20:27:17 [notice] 1#1: start worker process 39
-2026/11/20 20:27:17 [notice] 1#1: start worker process 40
-2026/11/20 20:27:17 [notice] 1#1: start worker process 41
-2026/11/20 20:27:17 [notice] 1#1: start worker process 42
-2026/11/20 20:27:17 [notice] 1#1: start worker process 43
-2026/11/20 20:27:17 [notice] 1#1: start worker process 44
-2026/11/20 20:27:17 [notice] 1#1: start worker process 45
-2026/11/20 20:27:17 [notice] 1#1: start worker process 46
-2026/11/20 20:27:17 [notice] 1#1: start worker process 47
-2026/11/20 20:27:17 [notice] 1#1: start worker process 48
+2026/11/20 20:31:16 [notice] 1#1: using the "epoll" event method
+2026/11/20 20:31:16 [notice] 1#1: nginx/1.31.9
+2026/11/20 20:31:16 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/11/20 20:31:16 [notice] 1#1: OS: Linux 6.18.58.1-microsoft-standard-WSL2
+2026/11/20 20:31:16 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/11/20 20:31:16 [notice] 1#1: start worker processes
+2026/11/20 20:31:16 [notice] 1#1: start worker process 29
+2026/11/20 20:31:16 [notice] 1#1: start worker process 30
+2026/11/20 20:31:16 [notice] 1#1: start worker process 31
+2026/11/20 20:31:16 [notice] 1#1: start worker process 32
+2026/11/20 20:31:16 [notice] 1#1: start worker process 33
+2026/11/20 20:31:16 [notice] 1#1: start worker process 34
+2026/11/20 20:31:16 [notice] 1#1: start worker process 35
+2026/11/20 20:31:16 [notice] 1#1: start worker process 36
+2026/11/20 20:31:16 [notice] 1#1: start worker process 37
+2026/11/20 20:31:16 [notice] 1#1: start worker process 38
+2026/11/20 20:31:16 [notice] 1#1: start worker process 39
+2026/11/20 20:31:16 [notice] 1#1: start worker process 40
+2026/11/20 20:31:16 [notice] 1#1: start worker process 41
+2026/11/20 20:31:16 [notice] 1#1: start worker process 42
+2026/11/20 20:31:16 [notice] 1#1: start worker process 43
+2026/11/20 20:31:16 [notice] 1#1: start worker process 44
+2026/11/20 20:31:16 [notice] 1#1: start worker process 45
+2026/11/20 20:31:16 [notice] 1#1: start worker process 46
+2026/11/20 20:31:16 [notice] 1#1: start worker process 47
+2026/11/20 20:31:16 [notice] 1#1: start worker process 48
 /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 /docker-entrypoint.sh: Configuration complete; ready for start up
-172.17.0.1 - - [20/Nov/2026:20:27:22 +0000] "GET / HTTP/1.1" 200 865 "-" "curl/8.23.0" "-"
+172.17.0.1 - - [20/Nov/2026:20:31:21 +0000] "GET / HTTP/1.1" 200 865 "-" "curl/8.23.0" "-"
 ```
 
 전체 로그: [logs/04_build_run.log](logs/04_build_run.log)
@@ -657,10 +648,10 @@ $ docker logs web-8080 | tail -5
 
 <!-- LOG:05_bind_mount -->
 ```bash
-# 2026-11-21 05:27:34 | 05_bind_mount
+# 2026-11-21 05:31:33 | 05_bind_mount
 # --- 호스트 디렉토리를 컨테이너 웹 루트에 바인드 마운트 ---
 $ docker run -d -p 8082:80 --name web-bind -v 'C:/Users/<user>/Documents/ia-codyssey/01-dev-workstation/practice/bind-site':/usr/share/nginx/html codyssey-web:1.0
-4e8b0ab3d75dd8c9e619bcdf85193f982c5257525935751d32190ef29ed8b297
+b7342a5fe38a2b1a0084f6c5380a397aeaac57a892d27aa4b7da609ac3cace30
 
 $ docker inspect web-bind --format '{{range .Mounts}}{{.Type}}: {{.Source}} -> {{.Destination}}{{end}}'
 bind: C:/Users/<user>/Documents/ia-codyssey/01-dev-workstation/practice/bind-site -> /usr/share/nginx/html
@@ -673,17 +664,17 @@ $ curl -s http://localhost:8082 | grep MESSAGE
   <p id="message">MESSAGE: original</p>
 
 # --- 호스트에서 파일 수정 (컨테이너 재시작/재빌드 없음) ---
-$ sed -i.bak 's/MESSAGE: original/MESSAGE: changed on host at 05:27:39/' 'practice/bind-site/index.html' && rm -f 'practice/bind-site/index.html.bak'
+$ sed -i.bak 's/MESSAGE: original/MESSAGE: changed on host at 05:31:37/' 'practice/bind-site/index.html' && rm -f 'practice/bind-site/index.html.bak'
 
 # --- 변경 후 ---
 $ grep MESSAGE 'practice/bind-site/index.html'
-  <p id="message">MESSAGE: changed on host at 05:27:39</p>
+  <p id="message">MESSAGE: changed on host at 05:31:37</p>
 
 $ curl -s http://localhost:8082 | grep MESSAGE
-  <p id="message">MESSAGE: changed on host at 05:27:39</p>
+  <p id="message">MESSAGE: changed on host at 05:31:37</p>
 
 $ docker exec web-bind grep MESSAGE /usr/share/nginx/html/index.html
-  <p id="message">MESSAGE: changed on host at 05:27:39</p>
+  <p id="message">MESSAGE: changed on host at 05:31:37</p>
 ```
 
 전체 로그: [logs/05_bind_mount.log](logs/05_bind_mount.log)
@@ -695,7 +686,7 @@ $ docker exec web-bind grep MESSAGE /usr/share/nginx/html/index.html
 
 <!-- LOG:06_volume -->
 ```bash
-# 2026-11-21 05:27:41 | 06_volume
+# 2026-11-21 05:31:39 | 06_volume
 # --- 볼륨 생성 / 확인 ---
 $ docker volume create codyssey-data
 codyssey-data
@@ -709,10 +700,10 @@ codyssey-data | driver=local | mountpoint=/var/lib/docker/volumes/codyssey-data/
 
 # --- 컨테이너 1 에 볼륨 연결 후 데이터 기록 ---
 $ docker run -d --name vol-test -v codyssey-data:/data ubuntu:22.04 sleep infinity
-af34f0e449622fc76f85a0e95ebdaa64adaa9b05fb59b6965bb759a103bb8d6c
+8f23b0a8204c84919bb026aae5a5ca48083e2387eb735e30b38b351fbda982c0
 
 $ docker exec vol-test bash -c 'echo "saved at $(date)" > /data/hello.txt && cat /data/hello.txt'
-saved at Fri Nov 20 20:27:44 UTC 2026
+saved at Fri Nov 20 20:31:42 UTC 2026
 
 # --- 비교용: 볼륨 밖(/tmp)에도 기록 ---
 $ docker exec vol-test bash -c 'echo temp > /tmp/temp.txt && ls /tmp/temp.txt'
@@ -727,10 +718,10 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 # --- 새 컨테이너 2 에 같은 볼륨 연결 → 데이터 유지 확인 ---
 $ docker run -d --name vol-test2 -v codyssey-data:/data ubuntu:22.04 sleep infinity
-6dea44ebc7e5a7af6663199e4cd21c124aa1a13454576b14592731f1e934eed1
+7877e537fc4016586ac361019563576e1e29bd742a2849dd522293d859aebe2a
 
 $ docker exec vol-test2 cat /data/hello.txt
-saved at Fri Nov 20 20:27:44 UTC 2026
+saved at Fri Nov 20 20:31:42 UTC 2026
 
 $ docker exec vol-test2 ls /tmp/temp.txt
 ls: cannot access '/tmp/temp.txt': No such file or directory
@@ -755,7 +746,7 @@ git config --global init.defaultBranch main
 
 <!-- LOG:07_git -->
 ```bash
-# 2026-11-21 05:28:36 | 07_git
+# 2026-11-21 05:32:34 | 07_git
 $ git --version
 git version 2.56.1.windows.1
 
@@ -794,9 +785,10 @@ origin	https://github.com/ignim-H/ia-codyssey.git (fetch)
 origin	https://github.com/ignim-H/ia-codyssey.git (push)
 
 $ git branch -vv
-* main c9d4db6 Initial commit
+* main 894be98 feat: 01 개발 워크스테이션 미션 (터미널/권한/Docker/Dockerfile/포트/마운트/볼륨/Git)
 
 $ git log --oneline -5
+894be98 feat: 01 개발 워크스테이션 미션 (터미널/권한/Docker/Dockerfile/포트/마운트/볼륨/Git)
 c9d4db6 Initial commit
 ```
 
@@ -851,14 +843,14 @@ c9d4db6 Initial commit
 
 <!-- LOG:08_troubleshoot -->
 ```bash
-# 2026-11-21 05:27:50 | 08_troubleshoot
+# 2026-11-21 05:31:49 | 08_troubleshoot
 # --- [케이스 1] 포트 충돌: 같은 호스트 포트(8090)를 두 컨테이너가 사용 ---
 $ docker run -d -p 8090:80 --name ts-a codyssey-web:1.0
-594dd0324faf020b5203f3a267a72d42a6a0ba71d4f0cc73c760be90695c013e
+ee8ca2bccbf6b6531251c7bdf325dbca628647a69901bc877992f61707d3183a
 
 $ docker run -d -p 8090:80 --name ts-b codyssey-web:1.0
-80d44f6aeef639ebcf0baa698e6f15a083e11771f2c41ac5cae3793931766c16
-docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint ts-b (1fbea153c3cbc83d3c045174086ff7fcf4e30efb6b0f0d24b9504940fbf0633b): Bind for 0.0.0.0:8090 failed: port is already allocated
+0d99fc5e25415b694a167a3eb928867289b20df601c591fd72013f26e80ca531
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint ts-b (ed38533362fd7abc32f672259837369489339fba3fc21ce38097ecd9a3f04eef): Bind for 0.0.0.0:8090 failed: port is already allocated
 
 Run 'docker run --help' for more information
 
@@ -866,33 +858,37 @@ Run 'docker run --help' for more information
 $ docker ps --filter publish=8090 --format '{{.Names}} {{.Ports}}'
 ts-a 0.0.0.0:8090->80/tcp, [::]:8090->80/tcp
 
-$ lsof -nP -iTCP:8090 -sTCP:LISTEN 2>/dev/null | head -3 || netstat -ano | grep ':8090' | head -3
+$ netstat -ano | grep LISTEN | grep ':8090 '
+  TCP    0.0.0.0:8090           0.0.0.0:0              LISTENING       25496
+  TCP    127.0.0.1:8090         0.0.0.0:0              LISTENING       30700
+  TCP    [::]:8090              [::]:0                 LISTENING       25496
+  TCP    [::1]:8090             [::]:0                 LISTENING       30700
 
 # --- 해결: 생성 실패한 컨테이너 제거 후 다른 호스트 포트(8091)로 실행 ---
 $ docker rm -f ts-b; docker run -d -p 8091:80 --name ts-b codyssey-web:1.0
 ts-b
-aa61c97a8506a6a2f0977ac826d5539041606c762b8b5487247ce88bbdb729ca
+5afd866cfafe1f6a2d8fdef19cf16bab3834bccf5175be79d2cd95b15a485869
 
 $ curl -s -o /dev/null -w 'HTTP %{http_code}\n' http://localhost:8091
 HTTP 200
 
 # --- [케이스 2] 컨테이너 이름 중복 ---
 $ docker run -d --name ts-name ubuntu:22.04 sleep 60
-62fba90448994ad7349f031aca95b97fd9f013418b265485deae578b48e614e8
+afe75a5366bee75a920f97f34f247798bbca8201ebe5fde3081e90649ad0ed3b
 
 $ docker run -d --name ts-name ubuntu:22.04 sleep 60
-docker: Error response from daemon: Conflict. The container name "/ts-name" is already in use by container "62fba90448994ad7349f031aca95b97fd9f013418b265485deae578b48e614e8". You have to remove (or rename) that container to be able to reuse that name.
+docker: Error response from daemon: Conflict. The container name "/ts-name" is already in use by container "afe75a5366bee75a920f97f34f247798bbca8201ebe5fde3081e90649ad0ed3b". You have to remove (or rename) that container to be able to reuse that name.
 
 Run 'docker run --help' for more information
 
-# --- 확인: 중지된 컨테이너도 이름을 점유한다 ---
+# --- 확인: 같은 이름의 기존 컨테이너가 존재 (중지 상태여도 삭제 전까지 이름 점유) ---
 $ docker ps -a --filter name=ts-name --format '{{.Names}} {{.Status}}'
-ts-name Up Less than a second
+ts-name Up 1 second
 
 # --- 해결: 기존 컨테이너 삭제 후 재실행 (또는 --rm 사용) ---
 $ docker rm -f ts-name && docker run -d --name ts-name ubuntu:22.04 sleep 60
 ts-name
-3cf5c6af89ec23108d8d8cf2e71884b7303cf4be2563bc8aed967d590204442e
+af7465b9dceffe37e1485bb53c29f40d44bffb228ddcc3f651f26743819d4329
 
 # --- 정리 ---
 $ docker rm -f ts-a ts-b ts-name
@@ -915,7 +911,7 @@ ts-name
 
 <!-- LOG:09_compose -->
 ```bash
-# 2026-11-21 05:27:59 | 09_compose
+# 2026-11-21 05:31:58 | 09_compose
 $ cat 'compose/docker-compose.yml'
 services:
   web:
@@ -947,42 +943,45 @@ $ cd 'compose' && docker compose up -d --build
 #2 transferring dockerfile: 1.17kB done
 #2 DONE 0.0s
 
-#3 [internal] load metadata for docker.io/library/nginx:alpine
-#3 DONE 0.8s
+#3 [auth] library/nginx:pull token for registry-1.docker.io
+#3 DONE 0.0s
 
-#4 [internal] load .dockerignore
-#4 transferring context: 2B done
-#4 DONE 0.0s
+#4 [internal] load metadata for docker.io/library/nginx:alpine
+#4 DONE 1.2s
 
-#5 [internal] load build context
-#5 transferring context: 124B done
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
 #5 DONE 0.0s
 
-#6 [1/4] FROM docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7
-#6 resolve docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7 0.0s done
+#6 [internal] load build context
+#6 transferring context: 124B done
 #6 DONE 0.0s
 
-#7 [2/4] RUN apk add --no-cache curl
-#7 CACHED
+#7 [1/4] FROM docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7
+#7 resolve docker.io/library/nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7 0.0s done
+#7 DONE 0.0s
 
-#8 [3/4] COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+#8 [2/4] RUN apk add --no-cache curl
 #8 CACHED
 
-#9 [4/4] COPY site/ /usr/share/nginx/html/
+#9 [3/4] COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 #9 CACHED
 
-#10 exporting to image
-#10 exporting layers done
-#10 exporting manifest sha256:b03b340229173f873a416e31a390a894bcfbb4585ef4c721b94c61f7958b2ed2 done
-#10 exporting config sha256:98d4a8f576b36a7566306c154dae11d588ed48eb7eac427e72668485aaa18bd5 done
-#10 exporting attestation manifest sha256:73253fe67afbf431b68eff148388195f0d8971513f6e325306185abf8f5f0aee 0.0s done
-#10 exporting manifest list sha256:29ddbcb426ffa0b3cbd91e2567214c97d3e08b41c0dd4ff378a087cdaea7ac69 0.0s done
-#10 naming to docker.io/library/codyssey-web:1.0 done
-#10 unpacking to docker.io/library/codyssey-web:1.0 0.0s done
-#10 DONE 0.2s
+#10 [4/4] COPY site/ /usr/share/nginx/html/
+#10 CACHED
 
-#11 resolving provenance for metadata file
-#11 DONE 0.0s
+#11 exporting to image
+#11 exporting layers done
+#11 exporting manifest sha256:b03b340229173f873a416e31a390a894bcfbb4585ef4c721b94c61f7958b2ed2 done
+#11 exporting config sha256:98d4a8f576b36a7566306c154dae11d588ed48eb7eac427e72668485aaa18bd5 0.0s done
+#11 exporting attestation manifest sha256:33a5d37380853decfd75af1ddd0dc5b24ae7bdc30d456c5a51fbc9f22ece5f3a 0.0s done
+#11 exporting manifest list sha256:0eb655b20999c4a3b6f561ee531670aedb7a3399f59c1dd5b237ee065ffb07d3 0.0s done
+#11 naming to docker.io/library/codyssey-web:1.0 done
+#11 unpacking to docker.io/library/codyssey-web:1.0 0.0s done
+#11 DONE 0.1s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
  Image codyssey-web:1.0 Built 
  Network compose_default Creating 
  Network compose_default Creating 
@@ -1026,11 +1025,11 @@ $ curl -s -o /dev/null -w 'HTTP %{http_code}\n' http://localhost:${WEB_PORT:-888
 HTTP 200
 
 $ cd 'compose' && docker compose logs --tail 5 web
-web-1  | 2026/11/20 20:28:02 [notice] 1#1: start worker process 46
-web-1  | 2026/11/20 20:28:02 [notice] 1#1: start worker process 47
-web-1  | 2026/11/20 20:28:02 [notice] 1#1: start worker process 48
-web-1  | 172.18.0.4 - - [20/Nov/2026:20:28:12 +0000] "GET / HTTP/1.1" 200 865 "-" "Wget" "-"
-web-1  | 172.18.0.1 - - [20/Nov/2026:20:28:14 +0000] "GET / HTTP/1.1" 200 865 "-" "curl/8.23.0" "-"
+web-1  | 2026/11/20 20:32:01 [notice] 1#1: start worker process 46
+web-1  | 2026/11/20 20:32:01 [notice] 1#1: start worker process 47
+web-1  | 2026/11/20 20:32:01 [notice] 1#1: start worker process 48
+web-1  | 172.18.0.4 - - [20/Nov/2026:20:32:11 +0000] "GET / HTTP/1.1" 200 865 "-" "Wget" "-"
+web-1  | 172.18.0.1 - - [20/Nov/2026:20:32:13 +0000] "GET / HTTP/1.1" 200 865 "-" "curl/8.23.0" "-"
 
 $ cd 'compose' && docker compose down
  Container compose-client-1 Stopping 
